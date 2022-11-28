@@ -24,7 +24,7 @@ import smach_ros
 from armor_api.armor_client import ArmorClient
 from std_msgs.msg import Bool
 
-
+pause_time= 1.5         #global variable for the sleeping time
 battery_status = 1      # Battery is charged
 urgency_status = 0      # Battery flag for the urgent room
 loading = True          # True map is not loaded, False map is loaded
@@ -251,7 +251,7 @@ def change_position(robPos, desPos):
             query_position = client.call('QUERY','OBJECTPROP','IND',['isIn','Robot1'])
             robot_position = find_individual(query_position.queried_objects)
 
-            rospy.sleep(5)
+            rospy.sleep(pause_time)
             rob_time = client.call('QUERY','DATAPROP','IND',['now', 'Robot1'])
             old_rob_time = find_time(rob_time.queried_objects)
             current_time=str(math.floor(time.time()))
@@ -271,7 +271,7 @@ def change_position(robPos, desPos):
             query_position = client.call('QUERY','OBJECTPROP','IND',['isIn','Robot1'])
             robot_position = find_individual(query_position.queried_objects)
 
-            rospy.sleep(5)
+            rospy.sleep(pause_time)
             rob_time = client.call('QUERY','DATAPROP','IND',['now', 'Robot1'])
             old_rob_time = find_time(rob_time.queried_objects)
             current_time=str(math.floor(time.time()))
@@ -297,7 +297,7 @@ def change_position(robPos, desPos):
             query_position = client.call('QUERY','OBJECTPROP','IND',['isIn','Robot1'])
             robot_position = find_individual(query_position.queried_objects)
 
-            rospy.sleep(5)
+            rospy.sleep(pause_time)
             rob_time = client.call('QUERY','DATAPROP','IND',['now', 'Robot1'])
             old_rob_time = find_time(rob_time.queried_objects)
             current_time=str(math.floor(time.time()))
@@ -361,13 +361,13 @@ class Load_map(smach.State):
     
     def execute(self, userdata):
         global loading
-        rospy.sleep(2)
+        rospy.sleep(pause_time)
         
         if loading == True:
             return 'waiting_map'
         else:
             client = ArmorClient("example", "ontoRef") 
-            client.call('LOAD','FILE','',['/root/ros_ws/src/Finite-state-machine-Lab/assignment_1/topological_map/my_map2.owl', 'http://bnc/exp-rob-lab/2022-23', 'true', 'PELLET', 'false'])
+            client.call('LOAD','FILE','',['/root/ros_ws/src/assignment_1/topological_map/my_map2.owl', 'http://bnc/exp-rob-lab/2022-23', 'true', 'PELLET', 'false'])
             
             client.manipulation.replace_objectprop_b2_ind('isIn', 'Robot1', 'C1', 'E')
             client.call('REASON','','',[''])
@@ -397,7 +397,7 @@ class Corridor_cruise(smach.State):
     def execute(self, userdata):
         global are_urgent
         global robot_position
-        rospy.sleep(2)
+        rospy.sleep(pause_time)
         
         client = ArmorClient("example", "ontoRef")
         client.call('REASON','','',[''])
@@ -415,7 +415,7 @@ class Corridor_cruise(smach.State):
                 # The second condition to check on is the urgent rooms
                 if robot_position == 'C1' :
                     print('the robot is in C1 should go in C2')
-                    rospy.sleep(2)
+                    rospy.sleep(pause_time)
 
                     change_position(robot_position, 'C2')
                     client.call('REASON','','',[''])
@@ -424,7 +424,7 @@ class Corridor_cruise(smach.State):
                 
                 elif robot_position == "C2"  :
                     print('the robot is in C2 should go in C1')
-                    rospy.sleep(2)
+                    rospy.sleep(pause_time)
                     
                     change_position(robot_position, 'C1')
                     client.call('REASON','','',[''])
@@ -462,7 +462,7 @@ class Recharging(smach.State):
         query_position = client.call('QUERY','OBJECTPROP','IND',['isIn','Robot1'])
         robot_position = find_individual(query_position.queried_objects)
 
-        rospy.sleep(2)
+        rospy.sleep(pause_time)
         
         if battery_status == 0:
             change_position(robot_position, 'E')
@@ -504,7 +504,7 @@ class Room_visiting(smach.State):
         are_urgent = urgent_rooms()
         
         print('the urgent rooms in room visiting are: ', are_urgent)
-        rospy.sleep(2) 
+        rospy.sleep(pause_time) 
         
         if urgency_status == 0:
             return 'no_urgent_room'
@@ -559,7 +559,7 @@ def main():
     Also initializes the subscription to the publishers.
 
     """
-    rospy.sleep(2)
+    rospy.sleep(pause_time)
     rospy.init_node('finite_state_machine')
     
     # Create a SMACH state machine
