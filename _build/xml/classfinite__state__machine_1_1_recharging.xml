@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfinite__state__machine_1_1_recharging" kind="class" language="Python" prot="public">
+    <compoundname>finite_state_machine::Recharging</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">State</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfinite__state__machine_1_1_recharging_1a5214b3826f5844078826a10887fe9996" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.Recharging.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="482" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="482" bodyend="484"/>
+      </memberdef>
+      <memberdef kind="function" id="classfinite__state__machine_1_1_recharging_1a41714a1c5abc911d552014eede6bf22b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.Recharging.execute</definition>
+        <argsstring>(self, userdata)</argsstring>
+        <name>execute</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>userdata</type>
+          <defname>userdata</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="485" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="485" bodyend="505"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Class that defines  the *Recharging* state, which manages the behavior when the battery is low, getting advertised by :mod:`callback_batt`, which will modify the shared variable  *battery_status*
+
+Args
+    - **smachState** State base interface
+
+Returns
+    - **full_battery** transition condition that changes status, going back to the *Corridor_cruise*
+    - **on_charge** transition condition that will keep this state active
+</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>finite_state_machine.Recharging</label>
+        <link refid="classfinite__state__machine_1_1_recharging"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>smach::State</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>finite_state_machine.Recharging</label>
+        <link refid="classfinite__state__machine_1_1_recharging"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>smach::State</label>
+      </node>
+    </collaborationgraph>
+    <location file="scripts/finite_state_machine.py" line="470" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="470" bodyend="506"/>
+    <listofallmembers>
+      <member refid="classfinite__state__machine_1_1_recharging_1a5214b3826f5844078826a10887fe9996" prot="public" virt="non-virtual"><scope>finite_state_machine::Recharging</scope><name>__init__</name></member>
+      <member refid="classfinite__state__machine_1_1_recharging_1a41714a1c5abc911d552014eede6bf22b" prot="public" virt="non-virtual"><scope>finite_state_machine::Recharging</scope><name>execute</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

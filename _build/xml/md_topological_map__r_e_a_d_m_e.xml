@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md_topological_map__r_e_a_d_m_e" kind="page">
+    <compoundname>md_topological_map_README</compoundname>
+    <title>Interact With an Ontology Through the aRMOR Service</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><bold>An ROS-based tutorial for the Experimental Robotics Laboratory course held at the University of Genoa</bold> <linebreak/>
+ Author: <emphasis>Luca Buoncompagni</emphasis></para>
+<para><hruler/>
+</para>
+<sect1 id="md_topological_map__r_e_a_d_m_e_1autotoc_md2">
+<title>Introduction</title>
+<para>This tutorial shows how to use the <ulink url="topological_map.owl">topological_map.owl</ulink> ontology in ROS. Such an ontology represents indoor locations and a mobile robot for surveillance purposes.</para>
+<para>You can find such an ontology in this repository, where the <ulink url="topological_map_abox.owl">topological_map_abox.owl</ulink> is a copy of the <computeroutput>topological_map.owl</computeroutput> file but with the Abox, i.e., with some individuals representing a specific environment for showing purposes. You might want to open the <computeroutput>topological_map_abox.owl</computeroutput> ontology with the Protégé editor (see installation below) to better know its structure, while the <computeroutput>topological_map.owl</computeroutput> ontology should be used by the robot within a ROS architecture.</para>
+<para>You can see more about OWL ontologies through <ulink url="https://drive.google.com/file/d/1A3Y8T6nIfXQ_UQOpCAr_HFSCwpTqELeP/view">this</ulink> popular tutorial.</para>
+</sect1>
+<sect1 id="md_topological_map__r_e_a_d_m_e_1autotoc_md3">
+<title>A Very Brief OWL-DL Premier</title>
+<para>An OWL ontology is based on the Description Logic (DL) formalism, and it encompasses three sets made by entities:<itemizedlist>
+<listitem><para>the TBox encodes a tree of <emphasis>classes</emphasis>,</para>
+</listitem><listitem><para>the RBox encodes a tree of <emphasis>objects</emphasis> or <emphasis>data properties</emphasis>,</para>
+</listitem><listitem><para>the ABox encodes a set of <emphasis>individuals</emphasis>. For simplicity, we will refer to a class with a capitalized name (e.g., <computeroutput>LOCATION</computeroutput>), to a data or object property with camel case notation (e.g., <computeroutput>isIn</computeroutput>), while individuals will have the first letter capitalized (e.g., <computeroutput>Robot1</computeroutput>).</para>
+</listitem></itemizedlist>
+</para>
+<para>In particular, the individuals are related to each other through object properties, and with literals (e.g., integers, strings, etc.) through data properties.</para>
+<para>Individuals can be classified into some classes, which are hierarchically arranged in an implication tree, i.e., if an individual belongs to a class, such an individual would always belong to its super-classes as well. In other words, the child class always implies its parents.</para>
+<para>Object and data properties have a domain and a range, and they can be specified in the definitions of the classes for classifying individuals.</para>
+<para>Note that the OWL formalism relies on the <emphasis>Open Word Assumption</emphasis>, which states that unknown information are neither verified nor false. Also, be aware that two entities (i.e., classes, individuals or properties) might be equivalent to each other if not explicitly stated as <emphasis>disjoint</emphasis>.</para>
+<para>Given some logic axioms in the ontology, a <emphasis>reasoner</emphasis> can be invoked to infer implicit knowledge. We will also exploit SWRL rules, which are if-then statements. Since not all reasoners can process SWRL rules, we will use the <emphasis>Pellet</emphasis> reasoner. Also, since OWL reasoning is a time-consuming task, you should invoke it only when strictly required.</para>
+</sect1>
+<sect1 id="md_topological_map__r_e_a_d_m_e_1autotoc_md4">
+<title>Software Tools</title>
+<para>Download the <ulink url="https://protege.stanford.edu/">Protégé</ulink> editor for your operative system, and unzip it in your home folder. Open a terminal, go into the unzipped folder and open Protégé by entering <computeroutput>./ run.sh</computeroutput>. When Proégé starts, a plugin installation popup should appear (that popup can always be found at <computeroutput>File -&gt; Check for Plugins</computeroutput>). From such a popup select <computeroutput>Pellet Reasoner Plugin</computeroutput> and <computeroutput>SWRL Tab Protege 5.0+ Plugin</computeroutput>. Then, install them and restart Protégé. When Protégé is running again, go to <computeroutput>window -&gt; tabs</computeroutput> and enable the <computeroutput>SWRLTab</computeroutput>. Now you can open an ontology available in this repository, update the reasoner from the dedicated tab (on top of the window), and see the results.</para>
+<para>To use an OWL ontology and the related reasoner within ROS, we will use the <ulink url="https://github.com/EmaroLab/armor">aRMOR</ulink>. If necessary, follow the instructions to install it in your workspace, and also check its documentation for knowing how to use aRMOR. In addition, you might want to check the <ulink url="https://github.com/EmaroLab/armor_py_api">armor_py_api</ulink>, which simplifies the calls to aRMOR, but it can only be used from a python-based ROS node.</para>
+</sect1>
+<sect1 id="md_topological_map__r_e_a_d_m_e_1autotoc_md5">
+<title>An Ontology for Topological Maps</title>
+<para><image type="html" name="classes.png" inline="yes"></image>
+</para>
+<para>The ontology provided in this repository encodes the classes shown in the picture above, where each <computeroutput>LOCATION</computeroutput> can be a <computeroutput>ROOM</computeroutput>, if it has only one <computeroutput>DOOR</computeroutput>, and a <computeroutput>CORRIDOR</computeroutput>, if it has more doors. Each door is associated with a location through the object property <computeroutput>hasDoor</computeroutput>. In addition, each <computeroutput>LOCATION</computeroutput> has the data property <computeroutput>visitedAt</computeroutput>, which represents the more recent timestamp (in seconds) when the robot visited such a location (see figure below).</para>
+<para><image type="html" name="location.png" inline="yes"></image>
+</para>
+<para>The <computeroutput>ROBOT</computeroutput> class contains only one individual (i.e., <computeroutput>Robot1</computeroutput>), which specifies some properties, as shown in the figure below. In particular, the <computeroutput>isIn</computeroutput> property specifies in which <computeroutput>LOCATION</computeroutput> the robot is, while the <computeroutput>now</computeroutput> property specifies the last timestamp (in seconds) when the robot changed location. In addition, the property <computeroutput>urgencyThreshold</computeroutput> represents a parameter to identify the <computeroutput>URGENT</computeroutput> location to be visited (see more details below).</para>
+<para><image type="html" name="robot.png" inline="yes"></image>
+</para>
+<para>A new <computeroutput>LOCATION</computeroutput> can be defined by creating a new individual with some properties <computeroutput>hasDoor</computeroutput>, which are related to other individuals that might be created to represent doors. The <computeroutput>hasDoor</computeroutput> relations allows the reasoner to infer each individual of type <computeroutput>DOOR</computeroutput> and <computeroutput>LOCATION</computeroutput>, which can be of sub-type <computeroutput>ROOM</computeroutput> and <computeroutput>CORRIDOR</computeroutput>. For instance, the example implemented in the <computeroutput>topological_map_abox.owl</computeroutput> ontology tackles the environment described in the figure below.</para>
+<para><image type="html" name="environment.png" inline="yes"></image>
+</para>
+<para>The ontology available in this repository also implements three SWRL rules to infer<itemizedlist>
+<listitem><para>the locations that are connected to another location through a door,</para>
+</listitem><listitem><para>the locations that the robot can reach by passing through a door,</para>
+</listitem><listitem><para>the locations that the robot should visit urgently, i.e., it did not visit them for a number of seconds greater than the value associated with the <computeroutput>urgencyThreshold</computeroutput> property.</para>
+</listitem></itemizedlist>
+</para>
+<para>After having invoked the reasoner, it infers several logic axioms, and the more interesting ones for this tutorial are:<itemizedlist>
+<listitem><para>properties <computeroutput>canReach</computeroutput>, which are generated to represent the locations that a robot can reach,</para>
+</listitem><listitem><para>the type of each <computeroutput>LOCATION</computeroutput>, which can be a <computeroutput>ROOM</computeroutput> and, eventually, a <computeroutput>CORRIDOR</computeroutput> (note that a <computeroutput>CORRIDOR</computeroutput> is represented as a specific type of <computeroutput>ROOM</computeroutput>, i.e., an individual of type <computeroutput>CORRIDOR</computeroutput> is always of type <computeroutput>ROOM</computeroutput> as well).</para>
+</listitem><listitem><para>locations of type <computeroutput>URGENT</computeroutput>, i.e., the robot should visit them urgently.</para>
+</listitem></itemizedlist>
+</para>
+<para>Such a data representation should be used to represent that the robot visit a location. Then, the robot should stay there for a while before moving to another location, and such a motion should be reflected in the ontology as well. In particular, the visiting policy should be such that the robot mainly moves across corridors but, when a near location becomes <emphasis>urgent</emphasis>, then it should go visit it.</para>
+<para>Please check the <computeroutput>topological_map_abox.owl</computeroutput> file with Protégé to see how the concepts above are implemented in an OWL ontology. You can also start the Pellet reasoner to see its results (highlighted in yellow in Protégé) and change the individuals to appreciate the differences.</para>
+</sect1>
+<sect1 id="md_topological_map__r_e_a_d_m_e_1autotoc_md6">
+<title>Use the Ontology within a ROS-based Architecture</title>
+<sect2 id="md_topological_map__r_e_a_d_m_e_1autotoc_md7">
+<title>The aRMOR service</title>
+<para>We exploit the aRMOR server for using OWL ontologies in a ROS architecture. Use the following commands to create a ROS executable based on Java when aRMOR runs for the first time.</para>
+<para><programlisting filename=".bash"><codeline><highlight class="normal">roscd<sp/>armor</highlight></codeline>
+<codeline><highlight class="normal">./gradlew<sp/>deployApp</highlight></codeline>
+</programlisting></para>
+<para>If you have a <computeroutput>roscore</computeroutput> running, you can launch the aRMOR server with <programlisting filename=".bash"><codeline><highlight class="normal">rosrun<sp/>armor<sp/>execute<sp/>it.emarolab.armor.ARMORMainService</highlight></codeline>
+</programlisting></para>
+<para>Note, that if you want to run aRMOR from launch file you should use the following configuration. <programlisting filename=".xml"><codeline><highlight class="normal">&lt;</highlight><highlight class="keywordtype">node</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">pkg</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;armor&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">type</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;execute&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">name</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;armor_service&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">args</highlight><highlight class="normal">=</highlight><highlight class="stringliteral">&quot;it.emarolab.armor.ARMORMainService&quot;</highlight><highlight class="normal">/&gt;</highlight></codeline>
+</programlisting></para>
+<para>aRMOR can perform three types of operations: manipulations, queries, and ontology management. Ontology management involves several utilities, such as loading or saving an ontology, as well as invoking the reasoner, etc. Manipulations are operations that change the logic axioms asserted in an ontology, e.g., adding an individual, replacing an object property, removing a class, etc. Finally, queries allow retrieving knowledge from the ontology, e.g., knowing the classes in which an individual belongs to, the properties applied to an individual, etc.</para>
+<para>By default, the entities (i.e., classes, individuals, properties) involved in <linebreak/>
+ manipulations are created if not already available in the ontology. Also, by default, queries involve the knowledge inferred by the reasoner, which should have been synchronized with recent manipulations, if any.</para>
+<para>aRMOR shares the same message to perform each operation. Namely, each request involves the following fields.<itemizedlist>
+<listitem><para><computeroutput>client_name</computeroutput>: It is an optional identifier used to synchronize different clients&apos; requests. In particular, when a client with a certain name requests an aRMOR operation, the request of another client with the same name is refused with an error.</para>
+</listitem><listitem><para><computeroutput>reference_name</computeroutput>: It is the name of an ontology to work with.</para>
+</listitem><listitem><para><computeroutput>command</computeroutput>: It specifies the command to execute e.g., <computeroutput>ADD</computeroutput>, <computeroutput>LOAD</computeroutput>, <computeroutput>QUERY</computeroutput>, etc.</para>
+</listitem><listitem><para><computeroutput>primary_command_spec</computeroutput>: It is a specifier of the given <computeroutput>command</computeroutput> and it can be optional, e.g. IND, FILE, etc.</para>
+</listitem><listitem><para><computeroutput>secondary_command_spec</computeroutput>: It is a further specifier of the given <computeroutput>command</computeroutput>, and it can be optional.</para>
+</listitem><listitem><para><computeroutput>args</computeroutput>: It is a list of arguments used to perform the given <computeroutput>command</computeroutput> with the <computeroutput>primary</computeroutput> and <computeroutput>secondary</computeroutput> <computeroutput>specifier</computeroutput>, e.g. the name of a class, a list of individuals, etc.</para>
+</listitem></itemizedlist>
+</para>
+<para>Please, check the <ulink url="https://github.com/EmaroLab/armor/blob/master/commands.md">documentation</ulink> to see the possible <computeroutput>command</computeroutput> and the relative <computeroutput>primary_command_spec</computeroutput>, <computeroutput>secondary_command_spec</computeroutput>, and <computeroutput>args</computeroutput>.</para>
+<para>On the other hand, the response of aRMOR involves the following fields.<itemizedlist>
+<listitem><para><computeroutput>success</computeroutput>: It is a Boolean specifying if the service was successfully computed.</para>
+</listitem><listitem><para><computeroutput>exit_code</computeroutput>: It is an integer specifying a possible source of errors.</para>
+</listitem><listitem><para><computeroutput>error_description</computeroutput>: It is a string describing a possible error.</para>
+</listitem><listitem><para><computeroutput>is_consistent</computeroutput>: It is a Boolean specifying if the ontology is consistent.</para>
+</listitem><listitem><para><computeroutput>timeout</computeroutput>: It is an optional field used while performing SPARQL queries.</para>
+</listitem><listitem><para><computeroutput>queried_objects</computeroutput>: It is an optional list of strings representing the queried entities.</para>
+</listitem><listitem><para><computeroutput>sparql_queried_objects</computeroutput>: It is an optional list of QueryItem (key-value pairs) given as the result of a SPARQL query.</para>
+</listitem></itemizedlist>
+</para>
+<para>Please, see the aRMOR <ulink url="https://github.com/EmaroLab/armor">package</ulink> for more documentation.</para>
+<para>For showing purposes, the following sections assume that aRMOR is running, and we will make requests directly from the terminal, i.e., by using the <computeroutput>rosservice call ...</computeroutput> commands.</para>
+</sect2>
+<sect2 id="md_topological_map__r_e_a_d_m_e_1autotoc_md8">
+<title>Load an Ontology</title>
+<para>Make the following request to load an ontology from file. <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;LOAD&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;FILE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;&lt;path_to_file&gt;/topological_map.owl&apos;,<sp/>&apos;http://bnc/exp-rob-lab/2022-23&apos;,<sp/>&apos;true&apos;,<sp/>&apos;PELLET&apos;,<sp/>&apos;false&apos;]&quot;</highlight></codeline>
+</programlisting></para>
+<para>Where we set a <computeroutput>client_name</computeroutput> which will be shared among all the clients since we do not need to synchronize them. Also, we set a <computeroutput>reference_name</computeroutput> that will be used to always refer to the same ontology loaded on memory.</para>
+<para>Then, we configure the command with the following <computeroutput>args</computeroutput>.<orderedlist>
+<listitem><para>The path to the file containing the ontology to load.</para>
+</listitem><listitem><para>The IRI, which is specified in the ontology itself.</para>
+</listitem><listitem><para>A Boolean value set to <computeroutput>true</computeroutput> for specifying that the manipulation should be automatically applied. If <computeroutput>false</computeroutput>, then the <computeroutput>APPLY</computeroutput> command should be explicitly stated to apply pending manipulations.</para>
+</listitem><listitem><para>The name of the reasoner to use.</para>
+</listitem><listitem><para>A Boolean set to <computeroutput>false</computeroutput> for specifying that the reasoning process should be explicitly stated. If <computeroutput>true</computeroutput>, then the reasoning process automatically runs after each manipulation; this would lead to an expensive computation.</para>
+</listitem></orderedlist>
+</para>
+<para>Note that, in this example, the 1st and 2nd fields of the request above do not change in the message below.</para>
+</sect2>
+<sect2 id="md_topological_map__r_e_a_d_m_e_1autotoc_md9">
+<title>Add a Location</title>
+<para>An individual <computeroutput>L</computeroutput> that represents a new location can be added in the ontology if it is paired with one or more doors <computeroutput>D</computeroutput> through the object property <computeroutput>hasDoor</computeroutput>. This can be done with the following request made for each door of <computeroutput>L</computeroutput>. <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;ADD&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;OBJECTPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;hasDoor&apos;,<sp/>&apos;L&apos;,<sp/>&apos;D&apos;]&quot;</highlight></codeline>
+</programlisting></para>
+<para>When all locations (e.g., <computeroutput>L1....Ln</computeroutput>) and doors (e.g., <computeroutput>D1...Dm</computeroutput>) have been added, it is important to set them as different individuals, which can be done with the following request. <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;DISJOINT&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;L1&apos;,<sp/>&apos;L2&apos;,<sp/>...,<sp/>&apos;Ln&apos;,<sp/>&apos;D1&apos;,<sp/>&apos;D2&apos;,<sp/>...,<sp/>&apos;Dm&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+<para>These logic axioms are enough to make the reasoning infer that <computeroutput>D</computeroutput> is a <computeroutput>DOOR</computeroutput>, and if <computeroutput>L</computeroutput> is a <computeroutput>ROOM</computeroutput> or a <computeroutput>CORRIDOR</computeroutput>. In addition, these axioms allow the reasoner to infer the location that the robot can reach.</para>
+</sect2>
+<sect2 id="md_topological_map__r_e_a_d_m_e_1autotoc_md10">
+<title>Robot&apos;s Movements</title>
+<para>The <computeroutput>ROBOT</computeroutput> named <computeroutput>Robot1</computeroutput> is always in a location, and this should be consistently represented in the ontology through the <computeroutput>isIn</computeroutput> property, over time. To represent the location of the robot (e.g., <computeroutput>Robot1 isIn L1</computeroutput>), you should use the following request. <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;ADD&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;OBJECTPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;isIn&apos;,<sp/>&apos;Robot1&apos;,<sp/>&apos;L1&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+<para>Since the location of the robot should be unique, when the robot moves to another location (e.g., <computeroutput>L2</computeroutput>) we should remove the old <computeroutput>isIn</computeroutput> value. This can be done through the command <programlisting><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;REPLACE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;OBJECTPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;isIn&apos;,<sp/>&apos;Robot1&apos;,<sp/><sp/>&apos;L2&apos;,<sp/>&apos;L1&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="md_topological_map__r_e_a_d_m_e_1autotoc_md11">
+<title>Timestamps Updating</title>
+<para>The instances representing the robot and locations are associated with a Unix timestamp, respectively through the <computeroutput>now</computeroutput> and <computeroutput>visitedAt</computeroutput> data properties, which are used to compute the urgency.</para>
+<para>Such timestamps might be represented in seconds, and they should be unique for each individual. Therefore, when a timestamp is introduced for the first time, the <computeroutput>ADD</computeroutput> command should be used. Then, similarly to above, the <computeroutput>REPLACE</computeroutput> command should be used for updating such a timestamp.</para>
+<para>Note that the <computeroutput>REPLACE</computeroutput> command also requires the old value to override. Such a value might be retrieved from the ontology through a query. However, if some manipulations have been performed, or if it is the first query we request to aRMOR, then we should invoke the reasoner first, i.e., make the request <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;REASON&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;&apos;]&quot;</highlight></codeline>
+</programlisting></para>
+<para>Then, we can query the timestamp associated with the robot, which represents the last time the robot changed location. Thus, use the following request, which should return <computeroutput>1665579740</computeroutput>. <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;QUERY&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;DATAPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;now&apos;,<sp/>&apos;Robot1&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+<para>Now, we can finally update the timestamp associated with the robot (e.g., to <computeroutput>1665579750</computeroutput>) with: <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;REPLACE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;DATAPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;now&apos;,<sp/>&apos;Robot1&apos;,<sp/>&apos;Long&apos;,<sp/>&apos;1665579750&apos;,<sp/>&apos;1665579740&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+<para>The above procedure concerns the logic axiom involving the <computeroutput>Robot1</computeroutput> individual, the <computeroutput>now</computeroutput> data property and a <computeroutput>Long</computeroutput> timestamp, and it should be done when the robot moves to a new location. When the robot enters a specific location, then the same procedure should also be used for such a location. For instance, let <computeroutput>Robot1</computeroutput> go in the location <computeroutput>L</computeroutput> at timestamp <computeroutput>1665579750</computeroutput>, then the <computeroutput>visitedAt</computeroutput> property of <computeroutput>L</computeroutput> should be replaced through the following request; where <computeroutput> 1665579710</computeroutput> is the last time <computeroutput>Robot1</computeroutput> was in <computeroutput>L</computeroutput> before. <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;REPLACE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;DATAPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;visitedAt&apos;,<sp/>&apos;L&apos;,<sp/>&apos;Long&apos;,<sp/>&apos;1665579750&apos;,<sp/>&apos;1665579710&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="md_topological_map__r_e_a_d_m_e_1autotoc_md12">
+<title>Retrieving Inferred Knowledge Through Queries</title>
+<para>To retrieve inferred knowledge, update the reasoner with the <computeroutput>REASON</computeroutput> command above if some manipulation has been done from the last time the reasoner has been updated. Then, query all the <computeroutput>canReach</computeroutput> value associated with <computeroutput>Robot1</computeroutput> with <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;QUERY&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;OBJECTPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;canReach&apos;,<sp/>&apos;Robot1&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+<para>The request above would return a set of locations that the robot can reach by passing through a <computeroutput>DOOR</computeroutput>, e.g., <computeroutput>L1</computeroutput>, <computeroutput>L2</computeroutput>, etc.</para>
+<para>Then, we can query information about these locations, e.g., <programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;QUERY&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;CLASS&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;L1&apos;,<sp/>&apos;false&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+<para>Which returns a set of classes that might involve <computeroutput>ROOM</computeroutput>, <computeroutput>CORRIDOR</computeroutput>, and <computeroutput>URGENT</computeroutput>.</para>
+</sect2>
+<sect2 id="md_topological_map__r_e_a_d_m_e_1autotoc_md13">
+<title>Save the Ontology</title>
+<para>For debugging purposes, you can save the ontology manipulated so far in order to open it with Protégé and inspect its contents. To save an ontology use</para>
+<para><programlisting filename=".bash"><codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;SAVE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;&lt;file_path&gt;/my_topological_map.owl&apos;]&quot;<sp/></highlight></codeline>
+</programlisting></para>
+</sect2>
+</sect1>
+<sect1 id="md_topological_map__r_e_a_d_m_e_1autotoc_md14">
+<title>Known issues</title>
+<para>Check the known issues in the <emphasis>Issue</emphasis> tab of this reposiory. They concerns the <ulink url="https://github.com/buoncubi/topological_map/issues/1">armor_py_api</ulink> client, and <ulink url="https://github.com/buoncubi/topological_map/issues/2">opening ontologies with SWRL rules on Protégé</ulink>.</para>
+<para><hruler/>
+ </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

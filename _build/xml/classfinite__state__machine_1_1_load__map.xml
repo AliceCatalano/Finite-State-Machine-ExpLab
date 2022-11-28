@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfinite__state__machine_1_1_load__map" kind="class" language="Python" prot="public">
+    <compoundname>finite_state_machine::Load_map</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">State</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfinite__state__machine_1_1_load__map_1aabe3fbc3d4b41812a4fc8c84f4ae516e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.Load_map.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="384" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="384" bodyend="386"/>
+      </memberdef>
+      <memberdef kind="function" id="classfinite__state__machine_1_1_load__map_1a817a0b98572bb2411f6c11a1497b5e62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.Load_map.execute</definition>
+        <argsstring>(self, userdata)</argsstring>
+        <name>execute</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>userdata</type>
+          <defname>userdata</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="387" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="387" bodyend="404"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Class that defines  the *Load_map* state, in which the code waits for the map,
+when the map is received the **loading** boolean variable will be False, the robot will enter in the Corridor and
+the outcome *uploaded_map* will make the state end to switch to the other state *Corridor_cruise*
+
+Args
+    - **smachState** State base interface
+
+Returns
+    - **waiting_map** transition condition that will keep this state active
+    - **uploaded_map** transition condition that will make this state end and go to the new state</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>finite_state_machine.Load_map</label>
+        <link refid="classfinite__state__machine_1_1_load__map"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>State</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>finite_state_machine.Load_map</label>
+        <link refid="classfinite__state__machine_1_1_load__map"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>State</label>
+      </node>
+    </collaborationgraph>
+    <location file="scripts/finite_state_machine.py" line="368" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="368" bodyend="405"/>
+    <listofallmembers>
+      <member refid="classfinite__state__machine_1_1_load__map_1aabe3fbc3d4b41812a4fc8c84f4ae516e" prot="public" virt="non-virtual"><scope>finite_state_machine::Load_map</scope><name>__init__</name></member>
+      <member refid="classfinite__state__machine_1_1_load__map_1a817a0b98572bb2411f6c11a1497b5e62" prot="public" virt="non-virtual"><scope>finite_state_machine::Load_map</scope><name>execute</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

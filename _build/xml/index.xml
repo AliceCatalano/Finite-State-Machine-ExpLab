@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.17">
+  <compound refid="classfinite__state__machine_1_1_corridor__cruise" kind="class"><name>finite_state_machine::Corridor_cruise</name>
+    <member refid="classfinite__state__machine_1_1_corridor__cruise_1a92ceef7f430046e0567491a8146bf21e" kind="function"><name>__init__</name></member>
+    <member refid="classfinite__state__machine_1_1_corridor__cruise_1a5f3a17cfa264fbdbf361dadfe9b337b0" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="classfinite__state__machine_1_1_load__map" kind="class"><name>finite_state_machine::Load_map</name>
+    <member refid="classfinite__state__machine_1_1_load__map_1aabe3fbc3d4b41812a4fc8c84f4ae516e" kind="function"><name>__init__</name></member>
+    <member refid="classfinite__state__machine_1_1_load__map_1a817a0b98572bb2411f6c11a1497b5e62" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="classfinite__state__machine_1_1_recharging" kind="class"><name>finite_state_machine::Recharging</name>
+    <member refid="classfinite__state__machine_1_1_recharging_1a5214b3826f5844078826a10887fe9996" kind="function"><name>__init__</name></member>
+    <member refid="classfinite__state__machine_1_1_recharging_1a41714a1c5abc911d552014eede6bf22b" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="classfinite__state__machine_1_1_room__visiting" kind="class"><name>finite_state_machine::Room_visiting</name>
+    <member refid="classfinite__state__machine_1_1_room__visiting_1ac123caac656e5a76f90effb7308d4e66" kind="function"><name>__init__</name></member>
+    <member refid="classfinite__state__machine_1_1_room__visiting_1aa7d1b3b19ddf35b9c60d80b96177cd76" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="namespacebattery__signal" kind="namespace"><name>battery_signal</name>
+    <member refid="namespacebattery__signal_1a4ebb6e8d6077ba6f23a1b48283cd60ab" kind="variable"><name>timeTo_recharge</name></member>
+    <member refid="namespacebattery__signal_1afcfd5dbf27d7fd31e05b89151a20e15b" kind="function"><name>battery_signal</name></member>
+  </compound>
+  <compound refid="namespaceconf" kind="namespace"><name>conf</name>
+    <member refid="conf_8py_1a332f430461432dc465213f884a1e4967" kind="variable"><name>shell</name></member>
+    <member refid="conf_8py_1a45653c983098153b78e33600e39230eb" kind="variable"><name>project</name></member>
+    <member refid="conf_8py_1a33fa97cf51dcb25970fbf53f10159589" kind="variable"><name>copyright</name></member>
+    <member refid="conf_8py_1a637c239d256432248aa8d9f3ab0b8c52" kind="variable"><name>author</name></member>
+    <member refid="conf_8py_1a325dc746d8bf05c54d26351c35a21d90" kind="variable"><name>release</name></member>
+    <member refid="conf_8py_1ae475e080536acb271a0a0efe56c3ba42" kind="variable"><name>extensions</name></member>
+    <member refid="conf_8py_1ae850ae634911b713e036b43894fdd525" kind="variable"><name>templates_path</name></member>
+    <member refid="conf_8py_1a7ad48fb6f3e9b129c02346ea0d3527c1" kind="variable"><name>exclude_patterns</name></member>
+    <member refid="conf_8py_1a3117edf4443d9b8c70a9f0f44294ba79" kind="variable"><name>highlight_language</name></member>
+    <member refid="conf_8py_1a10af2a769eb3bd3322e874f677e435b1" kind="variable"><name>source_suffix</name></member>
+    <member refid="conf_8py_1a6fcd7e5236f355b1e1a55f9d95988810" kind="variable"><name>master_doc</name></member>
+    <member refid="conf_8py_1a6c3bfcc1a44546c1c75ce20f55bd0fd6" kind="variable"><name>html_theme</name></member>
+    <member refid="conf_8py_1af4fb5d8851ccaade135c2668dd3ced41" kind="variable"><name>html_static_path</name></member>
+  </compound>
+  <compound refid="namespacefinite__state__machine" kind="namespace"><name>finite_state_machine</name>
+    <member refid="namespacefinite__state__machine_1adac7d29866d4f2725cbda317814add49" kind="variable"><name>battery_status</name></member>
+    <member refid="namespacefinite__state__machine_1a4a95d7a98741b0b3eebc81786d6573cb" kind="variable"><name>urgency_status</name></member>
+    <member refid="namespacefinite__state__machine_1af4d959f802e51d0467ad03a3f0c93955" kind="variable"><name>loading</name></member>
+    <member refid="namespacefinite__state__machine_1a32da7c91457bead7084ca414f6191c3e" kind="variable"><name>shared_connection</name></member>
+    <member refid="namespacefinite__state__machine_1ad17af8f1645a3a47e4deadc7ccd11e1d" kind="variable"><name>are_urgent</name></member>
+    <member refid="namespacefinite__state__machine_1afd118b5b10a871ae140f5cd26f39ed3c" kind="variable"><name>robot_position</name></member>
+    <member refid="namespacefinite__state__machine_1a57d63bd8e8ad09a9d59eccc3e60fa21b" kind="variable"><name>timestamp</name></member>
+    <member refid="namespacefinite__state__machine_1a52097984c057eadbc537ec223d7a6525" kind="function"><name>callback</name></member>
+    <member refid="namespacefinite__state__machine_1a92b25ba88c6fd28360e438e827ec74a7" kind="function"><name>callback_batt</name></member>
+    <member refid="namespacefinite__state__machine_1a5f8d9bf7c4535457aa3828733248902e" kind="function"><name>find_path</name></member>
+    <member refid="namespacefinite__state__machine_1a9b4999f9679399226fe493dbfea006d7" kind="function"><name>find_time</name></member>
+    <member refid="namespacefinite__state__machine_1afcaf46f6dda30500440fbc82a55ef012" kind="function"><name>find_list</name></member>
+    <member refid="namespacefinite__state__machine_1a967a37e3cd2f30bebb8fef463edf10ea" kind="function"><name>find_individual</name></member>
+    <member refid="namespacefinite__state__machine_1ae7119713b1961e01f47c4dbf6ab7a13b" kind="function"><name>urgent_rooms</name></member>
+    <member refid="namespacefinite__state__machine_1ac1fe105586183ee0a74c16f8938140c4" kind="function"><name>change_position</name></member>
+    <member refid="namespacefinite__state__machine_1a41225cd944336f18121ca93d83ca212a" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespaceload__map" kind="namespace"><name>load_map</name>
+    <member refid="namespaceload__map_1a030dd1e0fc7b255a77bc9f5f883cdf75" kind="function"><name>find_time</name></member>
+    <member refid="namespaceload__map_1acccf914a014e643a53012ec4d05111dc" kind="function"><name>load_std_map</name></member>
+  </compound>
+  <compound refid="_c_make_lists_8txt" kind="file"><name>CMakeLists.txt</name>
+  </compound>
+  <compound refid="conf_8py" kind="file"><name>conf.py</name>
+  </compound>
+  <compound refid="battery__signal_8py" kind="file"><name>battery_signal.py</name>
+  </compound>
+  <compound refid="finite__state__machine_8py" kind="file"><name>finite_state_machine.py</name>
+  </compound>
+  <compound refid="load__map_8py" kind="file"><name>load_map.py</name>
+  </compound>
+  <compound refid="_r_e_a_d_m_e_8md" kind="file"><name>README.md</name>
+  </compound>
+  <compound refid="md_topological_map__r_e_a_d_m_e" kind="page"><name>md_topological_map_README</name>
+  </compound>
+  <compound refid="dir_53e6fa9553ac22a5646d2a2b2d7b97a1" kind="dir"><name>scripts</name>
+  </compound>
+  <compound refid="dir_444e4b11e25270ae2388f3fd12450aef" kind="dir"><name>topological_map</name>
+  </compound>
+</doxygenindex>

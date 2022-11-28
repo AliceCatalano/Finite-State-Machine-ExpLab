@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfinite__state__machine_1_1_corridor__cruise" kind="class" language="Python" prot="public">
+    <compoundname>finite_state_machine::Corridor_cruise</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">State</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfinite__state__machine_1_1_corridor__cruise_1a92ceef7f430046e0567491a8146bf21e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.Corridor_cruise.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="423" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="423" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="classfinite__state__machine_1_1_corridor__cruise_1a5f3a17cfa264fbdbf361dadfe9b337b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.Corridor_cruise.execute</definition>
+        <argsstring>(self, userdata)</argsstring>
+        <name>execute</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>userdata</type>
+          <defname>userdata</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="426" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="426" bodyend="469"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Class that defines  the *Corridor_cruise* state, in which the main robot behavior is described.
+The surveillance  robot will cruise in the corridors until  any room gets *urgent*. The logic of the cruising is basic:
+the robot will start from one corridor, stay in it 2 seconds and change to the other corridor with the function ``change_position(robPos, desPos)``
+Moreover this state gets notified by the :mod:`callback_batt` and the :mod:`callback` which are the callback function of the publishers */loader* and */battery_status*
+
+Args
+    - **smachState** State base interface
+
+Returns
+    - **battery_low** transition condition that change status going to the *Recharging*
+    - **urgent_room** transition condition that will make this state end and go to the new state
+    - **stay_in_corridor** loop transition that will keep this state active</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>State</label>
+      </node>
+      <node id="1">
+        <label>finite_state_machine.Corridor_cruise</label>
+        <link refid="classfinite__state__machine_1_1_corridor__cruise"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>State</label>
+      </node>
+      <node id="1">
+        <label>finite_state_machine.Corridor_cruise</label>
+        <link refid="classfinite__state__machine_1_1_corridor__cruise"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="scripts/finite_state_machine.py" line="405" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="405" bodyend="470"/>
+    <listofallmembers>
+      <member refid="classfinite__state__machine_1_1_corridor__cruise_1a92ceef7f430046e0567491a8146bf21e" prot="public" virt="non-virtual"><scope>finite_state_machine::Corridor_cruise</scope><name>__init__</name></member>
+      <member refid="classfinite__state__machine_1_1_corridor__cruise_1a5f3a17cfa264fbdbf361dadfe9b337b0" prot="public" virt="non-virtual"><scope>finite_state_machine::Corridor_cruise</scope><name>execute</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

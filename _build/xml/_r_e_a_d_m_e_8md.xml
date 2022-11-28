@@ -1,0 +1,403 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Interact<sp/>With<sp/>an<sp/>Ontology<sp/>Through<sp/>the<sp/>aRMOR<sp/>Service</highlight></codeline>
+<codeline><highlight class="normal">**An<sp/>ROS-based<sp/>tutorial<sp/>for<sp/>the<sp/>Experimental<sp/>Robotics<sp/>Laboratory<sp/>course<sp/>held<sp/>at<sp/>the<sp/>University<sp/>of<sp/>Genoa**<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">Author:<sp/>*Luca<sp/>Buoncompagni*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Introduction</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>tutorial<sp/>shows<sp/>how<sp/>to<sp/>use<sp/>the<sp/>[topological_map.owl](topological_map.owl)<sp/>ontology<sp/>in<sp/>ROS.<sp/></highlight></codeline>
+<codeline><highlight class="normal">Such<sp/>an<sp/>ontology<sp/><sp/>represents<sp/>indoor<sp/>locations<sp/>and<sp/>a<sp/>mobile<sp/>robot<sp/>for<sp/>surveillance<sp/>purposes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">You<sp/>can<sp/>find<sp/>such<sp/>an<sp/>ontology<sp/>in<sp/>this<sp/>repository,<sp/>where<sp/>the<sp/>[topological_map_abox.owl](topological_map_abox.owl)<sp/></highlight></codeline>
+<codeline><highlight class="normal">is<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>`topological_map.owl`<sp/>file<sp/>but<sp/>with<sp/>the<sp/>Abox,<sp/>i.e.,<sp/>with<sp/>some<sp/></highlight></codeline>
+<codeline><highlight class="normal">individuals<sp/>representing<sp/>a<sp/>specific<sp/>environment<sp/>for<sp/>showing<sp/>purposes.<sp/>You<sp/>might<sp/>want<sp/>to<sp/>open<sp/></highlight></codeline>
+<codeline><highlight class="normal">the<sp/>`topological_map_abox.owl`<sp/>ontology<sp/>with<sp/>the<sp/>Protégé<sp/>editor<sp/>(see<sp/>installation<sp/>below)<sp/>to<sp/></highlight></codeline>
+<codeline><highlight class="normal">better<sp/>know<sp/>its<sp/>structure,<sp/>while<sp/>the<sp/>`topological_map.owl`<sp/>ontology<sp/>should<sp/>be<sp/>used<sp/>by<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">robot<sp/>within<sp/>a<sp/>ROS<sp/>architecture.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">You<sp/>can<sp/>see<sp/>more<sp/>about<sp/>OWL<sp/>ontologies<sp/>through<sp/>[this](https://drive.google.com/file/d/1A3Y8T6nIfXQ_UQOpCAr_HFSCwpTqELeP/view)<sp/></highlight></codeline>
+<codeline><highlight class="normal">popular<sp/>tutorial.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>A<sp/>Very<sp/>Brief<sp/>OWL-DL<sp/>Premier</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">An<sp/>OWL<sp/>ontology<sp/>is<sp/>based<sp/>on<sp/>the<sp/>Description<sp/>Logic<sp/>(DL)<sp/>formalism,<sp/>and<sp/>it<sp/>encompasses<sp/>three<sp/>sets<sp/></highlight></codeline>
+<codeline><highlight class="normal">made<sp/>by<sp/>entities:</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>the<sp/>TBox<sp/>encodes<sp/>a<sp/>tree<sp/>of<sp/>*classes*,</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>the<sp/>RBox<sp/>encodes<sp/>a<sp/>tree<sp/>of<sp/>*objects*<sp/>or<sp/>*data<sp/>properties*,<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>the<sp/>ABox<sp/>encodes<sp/>a<sp/>set<sp/>of<sp/>*individuals*.<sp/></highlight></codeline>
+<codeline><highlight class="normal">For<sp/>simplicity,<sp/>we<sp/>will<sp/>refer<sp/>to<sp/>a<sp/>class<sp/>with<sp/>a<sp/>capitalized<sp/>name<sp/>(e.g.,<sp/>`LOCATION`),<sp/>to<sp/>a<sp/>data<sp/></highlight></codeline>
+<codeline><highlight class="normal">or<sp/>object<sp/>property<sp/>with<sp/>camel<sp/>case<sp/>notation<sp/>(e.g.,<sp/>`isIn`),<sp/>while<sp/>individuals<sp/>will<sp/>have<sp/>the<sp/>first</highlight></codeline>
+<codeline><highlight class="normal">letter<sp/>capitalized<sp/>(e.g.,<sp/>`Robot1`).</highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight></codeline>
+<codeline><highlight class="normal">In<sp/>particular,<sp/>the<sp/>individuals<sp/>are<sp/>related<sp/>to<sp/>each<sp/>other<sp/>through<sp/>object<sp/>properties,<sp/>and<sp/></highlight></codeline>
+<codeline><highlight class="normal">with<sp/>literals<sp/>(e.g.,<sp/>integers,<sp/>strings,<sp/>etc.)<sp/>through<sp/>data<sp/>properties.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Individuals<sp/>can<sp/>be<sp/>classified<sp/>into<sp/>some<sp/>classes,<sp/>which<sp/>are<sp/>hierarchically<sp/>arranged<sp/>in<sp/>an<sp/></highlight></codeline>
+<codeline><highlight class="normal">implication<sp/>tree,<sp/>i.e.,<sp/>if<sp/>an<sp/>individual<sp/>belongs<sp/>to<sp/>a<sp/>class,<sp/>such<sp/>an<sp/>individual<sp/>would<sp/>always<sp/></highlight></codeline>
+<codeline><highlight class="normal">belong<sp/>to<sp/>its<sp/>super-classes<sp/>as<sp/>well.<sp/>In<sp/>other<sp/>words,<sp/>the<sp/>child<sp/>class<sp/>always<sp/>implies<sp/>its<sp/>parents.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Object<sp/>and<sp/>data<sp/>properties<sp/>have<sp/>a<sp/>domain<sp/>and<sp/>a<sp/>range,<sp/>and<sp/>they<sp/>can<sp/>be<sp/>specified<sp/>in<sp/>the<sp/>definitions</highlight></codeline>
+<codeline><highlight class="normal">of<sp/>the<sp/>classes<sp/>for<sp/>classifying<sp/>individuals.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Note<sp/>that<sp/>the<sp/>OWL<sp/>formalism<sp/>relies<sp/>on<sp/>the<sp/>*Open<sp/>Word<sp/>Assumption*,<sp/>which<sp/>states<sp/>that<sp/>unknown<sp/></highlight></codeline>
+<codeline><highlight class="normal">information<sp/>are<sp/>neither<sp/>verified<sp/>nor<sp/>false.<sp/>Also,<sp/>be<sp/>aware<sp/>that<sp/>two<sp/>entities<sp/>(i.e.,<sp/>classes,<sp/>individuals</highlight></codeline>
+<codeline><highlight class="normal">or<sp/>properties)<sp/>might<sp/>be<sp/>equivalent<sp/>to<sp/>each<sp/>other<sp/>if<sp/>not<sp/>explicitly<sp/>stated<sp/>as<sp/>*disjoint*.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Given<sp/>some<sp/>logic<sp/>axioms<sp/>in<sp/>the<sp/>ontology,<sp/>a<sp/>*reasoner*<sp/>can<sp/>be<sp/>invoked<sp/>to<sp/>infer<sp/>implicit<sp/>knowledge.</highlight></codeline>
+<codeline><highlight class="normal">We<sp/>will<sp/>also<sp/>exploit<sp/>SWRL<sp/>rules,<sp/>which<sp/>are<sp/>if-then<sp/>statements.<sp/>Since<sp/>not<sp/>all<sp/>reasoners<sp/>can<sp/></highlight></codeline>
+<codeline><highlight class="normal">process<sp/>SWRL<sp/>rules,<sp/>we<sp/>will<sp/>use<sp/>the<sp/>*Pellet*<sp/>reasoner.<sp/>Also,<sp/>since<sp/>OWL<sp/>reasoning<sp/>is<sp/>a<sp/></highlight></codeline>
+<codeline><highlight class="normal">time-consuming<sp/>task,<sp/>you<sp/>should<sp/>invoke<sp/>it<sp/>only<sp/>when<sp/>strictly<sp/>required.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Software<sp/>Tools</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Download<sp/>the<sp/>[Protégé](https://protege.stanford.edu/)<sp/>editor<sp/>for<sp/>your<sp/>operative<sp/>system,<sp/>and<sp/>unzip<sp/>it<sp/>in<sp/></highlight></codeline>
+<codeline><highlight class="normal">your<sp/>home<sp/>folder.<sp/>Open<sp/>a<sp/>terminal,<sp/>go<sp/>into<sp/>the<sp/>unzipped<sp/>folder<sp/>and<sp/>open<sp/>Protégé<sp/>by<sp/>entering<sp/>`./</highlight></codeline>
+<codeline><highlight class="normal">run.sh`.<sp/>When<sp/>Proégé<sp/>starts,<sp/>a<sp/>plugin<sp/>installation<sp/>popup<sp/>should<sp/>appear<sp/>(that<sp/>popup<sp/>can<sp/>always<sp/></highlight></codeline>
+<codeline><highlight class="normal">be<sp/>found<sp/>at<sp/>`File<sp/>-&gt;<sp/>Check<sp/>for<sp/>Plugins`).<sp/>From<sp/>such<sp/>a<sp/>popup<sp/>select<sp/>`Pellet<sp/>Reasoner<sp/>Plugin`<sp/>and<sp/></highlight></codeline>
+<codeline><highlight class="normal">`SWRL<sp/>Tab<sp/>Protege<sp/>5.0+<sp/>Plugin`.<sp/>Then,<sp/>install<sp/>them<sp/>and<sp/>restart<sp/>Protégé.<sp/>When<sp/>Protégé<sp/>is<sp/>running</highlight></codeline>
+<codeline><highlight class="normal">again,<sp/>go<sp/>to<sp/>`window<sp/>-&gt;<sp/>tabs`<sp/>and<sp/>enable<sp/>the<sp/>`SWRLTab`.<sp/>Now<sp/>you<sp/>can<sp/>open<sp/>an<sp/>ontology<sp/>available<sp/>in<sp/>this<sp/></highlight></codeline>
+<codeline><highlight class="normal">repository,<sp/>update<sp/>the<sp/><sp/>reasoner<sp/>from<sp/>the<sp/>dedicated<sp/>tab<sp/>(on<sp/>top<sp/>of<sp/>the<sp/>window),<sp/>and<sp/>see<sp/>the<sp/>results.</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>use<sp/>an<sp/>OWL<sp/>ontology<sp/>and<sp/>the<sp/>related<sp/>reasoner<sp/>within<sp/>ROS,<sp/>we<sp/>will<sp/>use<sp/>the<sp/>[aRMOR](https://github.com/EmaroLab/armor).<sp/></highlight></codeline>
+<codeline><highlight class="normal">If<sp/>necessary,<sp/>follow<sp/>the<sp/>instructions<sp/>to<sp/>install<sp/>it<sp/>in<sp/>your<sp/>workspace,<sp/>and<sp/>also<sp/>check<sp/>its<sp/></highlight></codeline>
+<codeline><highlight class="normal">documentation<sp/>for<sp/>knowing<sp/>how<sp/>to<sp/>use<sp/>aRMOR.<sp/>In<sp/>addition,<sp/>you<sp/>might<sp/>want<sp/>to<sp/>check<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">[armor_py_api](https://github.com/EmaroLab/armor_py_api),<sp/>which<sp/>simplifies<sp/>the<sp/>calls<sp/>to<sp/>aRMOR,</highlight></codeline>
+<codeline><highlight class="normal">but<sp/>it<sp/>can<sp/>only<sp/>be<sp/>used<sp/>from<sp/>a<sp/>python-based<sp/>ROS<sp/>node.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>An<sp/>Ontology<sp/>for<sp/>Topological<sp/>Maps</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;img<sp/>src=&quot;https://github.com/buoncubi/topological_map/blob/main/figures/classes.png&quot;<sp/>width=&quot;300&quot;&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>ontology<sp/>provided<sp/>in<sp/>this<sp/>repository<sp/>encodes<sp/>the<sp/>classes<sp/>shown<sp/>in<sp/>the<sp/>picture<sp/>above,<sp/>where<sp/></highlight></codeline>
+<codeline><highlight class="normal">each<sp/>`LOCATION`<sp/>can<sp/>be<sp/>a<sp/>`ROOM`,<sp/>if<sp/>it<sp/>has<sp/>only<sp/>one<sp/>`DOOR`,<sp/>and<sp/>a<sp/>`CORRIDOR`,<sp/>if<sp/>it<sp/>has<sp/>more<sp/></highlight></codeline>
+<codeline><highlight class="normal">doors.<sp/>Each<sp/>door<sp/>is<sp/>associated<sp/>with<sp/>a<sp/>location<sp/>through<sp/>the<sp/>object<sp/>property<sp/>`hasDoor`.<sp/>In<sp/>addition,<sp/></highlight></codeline>
+<codeline><highlight class="normal">each<sp/>`LOCATION`<sp/>has<sp/>the<sp/>data<sp/>property<sp/>`visitedAt`,<sp/>which<sp/>represents<sp/>the<sp/>more<sp/>recent<sp/>timestamp<sp/>(in<sp/></highlight></codeline>
+<codeline><highlight class="normal">seconds)<sp/>when<sp/>the<sp/>robot<sp/>visited<sp/>such<sp/>a<sp/>location<sp/>(see<sp/>figure<sp/>below).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;img<sp/>src=&quot;https://github.com/buoncubi/topological_map/blob/main/figures/location.png&quot;<sp/>width=&quot;300&quot;&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`ROBOT`<sp/>class<sp/>contains<sp/>only<sp/>one<sp/>individual<sp/>(i.e.,<sp/>`Robot1`),<sp/>which<sp/>specifies<sp/>some<sp/></highlight></codeline>
+<codeline><highlight class="normal">properties,<sp/>as<sp/>shown<sp/>in<sp/>the<sp/>figure<sp/>below.<sp/>In<sp/>particular,<sp/>the<sp/>`isIn`<sp/>property<sp/>specifies<sp/>in<sp/>which<sp/></highlight></codeline>
+<codeline><highlight class="normal">`LOCATION`<sp/>the<sp/>robot<sp/>is,<sp/>while<sp/>the<sp/>`now`<sp/>property<sp/>specifies<sp/>the<sp/>last<sp/>timestamp<sp/>(in<sp/>seconds)<sp/>when</highlight></codeline>
+<codeline><highlight class="normal">the<sp/>robot<sp/>changed<sp/>location.<sp/>In<sp/>addition,<sp/>the<sp/>property<sp/>`urgencyThreshold`<sp/>represents<sp/>a<sp/>parameter</highlight></codeline>
+<codeline><highlight class="normal">to<sp/>identify<sp/>the<sp/>`URGENT`<sp/>location<sp/>to<sp/>be<sp/>visited<sp/>(see<sp/>more<sp/>details<sp/>below).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;img<sp/>src=&quot;https://github.com/buoncubi/topological_map/blob/main/figures/robot.png&quot;<sp/>width=&quot;300&quot;&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>new<sp/>`LOCATION`<sp/>can<sp/>be<sp/>defined<sp/>by<sp/>creating<sp/>a<sp/>new<sp/>individual<sp/>with<sp/>some<sp/>properties<sp/>`hasDoor`,<sp/></highlight></codeline>
+<codeline><highlight class="normal">which<sp/>are<sp/>related<sp/>to<sp/>other<sp/>individuals<sp/>that<sp/>might<sp/>be<sp/>created<sp/>to<sp/>represent<sp/>doors.<sp/>The<sp/>`hasDoor`<sp/></highlight></codeline>
+<codeline><highlight class="normal">relations<sp/>allows<sp/>the<sp/>reasoner<sp/>to<sp/>infer<sp/>each<sp/>individual<sp/>of<sp/>type<sp/>`DOOR`<sp/>and<sp/>`LOCATION`,<sp/>which<sp/>can<sp/></highlight></codeline>
+<codeline><highlight class="normal">be<sp/>of<sp/>sub-type<sp/>`ROOM`<sp/>and<sp/>`CORRIDOR`.<sp/>For<sp/>instance,<sp/>the<sp/>example<sp/>implemented<sp/>in<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">`topological_map_abox.owl`<sp/>ontology<sp/>tackles<sp/>the<sp/>environment<sp/>described<sp/>in<sp/>the<sp/>figure<sp/>below.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&lt;img<sp/>src=&quot;https://github.com/buoncubi/topological_map/blob/main/figures/environment.png&quot;<sp/>width=&quot;300&quot;&gt;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>ontology<sp/>available<sp/>in<sp/>this<sp/>repository<sp/>also<sp/>implements<sp/>three<sp/>SWRL<sp/>rules<sp/>to<sp/>infer<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>the<sp/>locations<sp/>that<sp/>are<sp/>connected<sp/>to<sp/>another<sp/>location<sp/>through<sp/>a<sp/>door,</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>the<sp/>locations<sp/>that<sp/>the<sp/>robot<sp/>can<sp/>reach<sp/>by<sp/>passing<sp/>through<sp/>a<sp/>door,</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>the<sp/>locations<sp/>that<sp/>the<sp/>robot<sp/>should<sp/>visit<sp/>urgently,<sp/>i.e.,<sp/>it<sp/>did<sp/>not<sp/>visit<sp/>them<sp/>for<sp/>a<sp/>number<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>of<sp/>seconds<sp/>greater<sp/>than<sp/>the<sp/>value<sp/>associated<sp/>with<sp/>the<sp/>`urgencyThreshold`<sp/>property.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>having<sp/>invoked<sp/>the<sp/>reasoner,<sp/>it<sp/>infers<sp/>several<sp/>logic<sp/>axioms,<sp/>and<sp/>the<sp/>more<sp/>interesting<sp/>ones<sp/></highlight></codeline>
+<codeline><highlight class="normal">for<sp/>this<sp/>tutorial<sp/>are:</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>properties<sp/>`canReach`,<sp/>which<sp/>are<sp/>generated<sp/>to<sp/>represent<sp/>the<sp/>locations<sp/>that<sp/>a<sp/>robot<sp/>can<sp/>reach,</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>the<sp/>type<sp/>of<sp/>each<sp/>`LOCATION`,<sp/>which<sp/>can<sp/>be<sp/>a<sp/>`ROOM`<sp/>and,<sp/>eventually,<sp/>a<sp/>`CORRIDOR`</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>(note<sp/>that<sp/>a<sp/>`CORRIDOR`<sp/>is<sp/>represented<sp/>as<sp/>a<sp/>specific<sp/>type<sp/>of<sp/>`ROOM`,<sp/>i.e.,<sp/>an<sp/>individual<sp/>of<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>type<sp/>`CORRIDOR`<sp/>is<sp/>always<sp/>of<sp/>type<sp/>`ROOM`<sp/>as<sp/>well).</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>locations<sp/>of<sp/>type<sp/>`URGENT`,<sp/>i.e.,<sp/>the<sp/>robot<sp/>should<sp/>visit<sp/>them<sp/>urgently.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Such<sp/>a<sp/>data<sp/>representation<sp/>should<sp/>be<sp/>used<sp/>to<sp/>represent<sp/>that<sp/>the<sp/>robot<sp/>visit<sp/>a<sp/>location.<sp/>Then,<sp/></highlight></codeline>
+<codeline><highlight class="normal">the<sp/>robot<sp/>should<sp/>stay<sp/>there<sp/>for<sp/>a<sp/>while<sp/>before<sp/>moving<sp/>to<sp/>another<sp/>location,<sp/>and<sp/>such<sp/>a<sp/>motion</highlight></codeline>
+<codeline><highlight class="normal">should<sp/>be<sp/>reflected<sp/>in<sp/>the<sp/>ontology<sp/>as<sp/>well.<sp/>In<sp/>particular,<sp/>the<sp/>visiting<sp/>policy<sp/>should<sp/>be<sp/>such<sp/></highlight></codeline>
+<codeline><highlight class="normal">that<sp/>the<sp/>robot<sp/>mainly<sp/>moves<sp/>across<sp/>corridors<sp/>but,<sp/>when<sp/>a<sp/>near<sp/>location<sp/>becomes<sp/>*urgent*,<sp/>then<sp/></highlight></codeline>
+<codeline><highlight class="normal">it<sp/>should<sp/>go<sp/>visit<sp/>it.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Please<sp/>check<sp/>the<sp/>`topological_map_abox.owl`<sp/>file<sp/>with<sp/>Protégé<sp/>to<sp/>see<sp/>how<sp/>the<sp/>concepts<sp/>above<sp/>are<sp/></highlight></codeline>
+<codeline><highlight class="normal">implemented<sp/>in<sp/>an<sp/>OWL<sp/>ontology.<sp/>You<sp/>can<sp/>also<sp/>start<sp/>the<sp/>Pellet<sp/>reasoner<sp/>to<sp/>see<sp/>its<sp/>results<sp/></highlight></codeline>
+<codeline><highlight class="normal">(highlighted<sp/>in<sp/>yellow<sp/>in<sp/>Protégé)<sp/>and<sp/>change<sp/>the<sp/>individuals<sp/>to<sp/>appreciate<sp/>the<sp/>differences.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Use<sp/>the<sp/>Ontology<sp/>within<sp/>a<sp/>ROS-based<sp/>Architecture</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>The<sp/>aRMOR<sp/>service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">We<sp/>exploit<sp/>the<sp/>aRMOR<sp/>server<sp/>for<sp/>using<sp/>OWL<sp/>ontologies<sp/>in<sp/>a<sp/>ROS<sp/>architecture.<sp/>Use<sp/>the<sp/>following<sp/></highlight></codeline>
+<codeline><highlight class="normal">commands<sp/>to<sp/>create<sp/>a<sp/>ROS<sp/>executable<sp/>based<sp/>on<sp/>Java<sp/>when<sp/>aRMOR<sp/>runs<sp/>for<sp/>the<sp/>first<sp/>time.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">roscd<sp/>armor</highlight></codeline>
+<codeline><highlight class="normal">./gradlew<sp/>deployApp</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">If<sp/>you<sp/>have<sp/>a<sp/>`roscore`<sp/>running,<sp/>you<sp/>can<sp/>launch<sp/>the<sp/>aRMOR<sp/>server<sp/>with<sp/></highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosrun<sp/>armor<sp/>execute<sp/>it.emarolab.armor.ARMORMainService</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Note,<sp/>that<sp/>if<sp/>you<sp/>want<sp/>to<sp/>run<sp/>aRMOR<sp/>from<sp/>launch<sp/>file<sp/>you<sp/>should<sp/>use<sp/>the<sp/>following<sp/>configuration.</highlight></codeline>
+<codeline><highlight class="normal">```xml</highlight></codeline>
+<codeline><highlight class="normal">&lt;node<sp/>pkg=&quot;armor&quot;<sp/>type=&quot;execute&quot;<sp/>name=&quot;armor_service&quot;<sp/>args=&quot;it.emarolab.armor.ARMORMainService&quot;/&gt;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">aRMOR<sp/>can<sp/>perform<sp/>three<sp/>types<sp/>of<sp/>operations:<sp/>manipulations,<sp/>queries,<sp/>and<sp/>ontology<sp/>management.</highlight></codeline>
+<codeline><highlight class="normal">Ontology<sp/>management<sp/>involves<sp/>several<sp/>utilities,<sp/>such<sp/>as<sp/>loading<sp/>or<sp/>saving<sp/>an<sp/>ontology,<sp/>as<sp/>well<sp/>as</highlight></codeline>
+<codeline><highlight class="normal">invoking<sp/>the<sp/>reasoner,<sp/>etc.<sp/>Manipulations<sp/>are<sp/>operations<sp/>that<sp/>change<sp/>the<sp/>logic<sp/>axioms<sp/>asserted<sp/>in<sp/></highlight></codeline>
+<codeline><highlight class="normal">an<sp/>ontology,<sp/>e.g.,<sp/>adding<sp/>an<sp/>individual,<sp/>replacing<sp/>an<sp/>object<sp/>property,<sp/>removing<sp/>a<sp/>class,<sp/>etc.<sp/></highlight></codeline>
+<codeline><highlight class="normal">Finally,<sp/>queries<sp/>allow<sp/>retrieving<sp/>knowledge<sp/>from<sp/>the<sp/>ontology,<sp/>e.g.,<sp/>knowing<sp/>the<sp/>classes<sp/>in<sp/>which<sp/></highlight></codeline>
+<codeline><highlight class="normal">an<sp/>individual<sp/>belongs<sp/>to,<sp/>the<sp/>properties<sp/>applied<sp/>to<sp/>an<sp/>individual,<sp/>etc.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">By<sp/>default,<sp/>the<sp/>entities<sp/>(i.e.,<sp/>classes,<sp/>individuals,<sp/>properties)<sp/>involved<sp/>in<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">manipulations<sp/>are<sp/>created<sp/>if<sp/>not<sp/>already<sp/>available<sp/>in<sp/>the<sp/>ontology.<sp/>Also,<sp/>by<sp/>default,<sp/>queries<sp/></highlight></codeline>
+<codeline><highlight class="normal">involve<sp/>the<sp/>knowledge<sp/>inferred<sp/>by<sp/>the<sp/>reasoner,<sp/>which<sp/>should<sp/>have<sp/>been<sp/>synchronized<sp/>with<sp/>recent<sp/></highlight></codeline>
+<codeline><highlight class="normal">manipulations,<sp/>if<sp/>any.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">aRMOR<sp/>shares<sp/>the<sp/>same<sp/>message<sp/>to<sp/>perform<sp/>each<sp/>operation.<sp/>Namely,<sp/>each<sp/>request<sp/>involves<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">following<sp/>fields.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`client_name`:<sp/>It<sp/>is<sp/>an<sp/>optional<sp/>identifier<sp/>used<sp/>to<sp/>synchronize<sp/>different<sp/>clients&apos;<sp/>requests.<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>In<sp/>particular,<sp/>when<sp/>a<sp/>client<sp/>with<sp/>a<sp/>certain<sp/>name<sp/>requests<sp/>an<sp/>aRMOR<sp/>operation,<sp/>the<sp/>request<sp/>of<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>another<sp/>client<sp/>with<sp/>the<sp/>same<sp/>name<sp/>is<sp/>refused<sp/>with<sp/>an<sp/>error.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`reference_name`:<sp/>It<sp/>is<sp/>the<sp/>name<sp/>of<sp/>an<sp/>ontology<sp/>to<sp/>work<sp/>with.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`command`:<sp/>It<sp/>specifies<sp/>the<sp/>command<sp/>to<sp/>execute<sp/>e.g.,<sp/>`ADD`,<sp/>`LOAD`,<sp/>`QUERY`,<sp/>etc.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`primary_command_spec`:<sp/>It<sp/>is<sp/>a<sp/>specifier<sp/>of<sp/>the<sp/>given<sp/>`command`<sp/>and<sp/>it<sp/>can<sp/>be<sp/>optional,<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>e.g.<sp/>IND,<sp/>FILE,<sp/>etc.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`secondary_command_spec`:<sp/>It<sp/>is<sp/>a<sp/>further<sp/>specifier<sp/>of<sp/>the<sp/>given<sp/>`command`,<sp/>and<sp/>it<sp/>can<sp/>be<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>optional.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`args`:<sp/>It<sp/>is<sp/>a<sp/>list<sp/>of<sp/>arguments<sp/>used<sp/>to<sp/>perform<sp/>the<sp/>given<sp/>`command`<sp/>with<sp/>the<sp/>`primary`<sp/>and<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>`secondary`<sp/>`specifier`,<sp/>e.g.<sp/>the<sp/>name<sp/>of<sp/>a<sp/>class,<sp/>a<sp/>list<sp/>of<sp/>individuals,<sp/>etc.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Please,<sp/>check<sp/>the<sp/>[documentation](https://github.com/EmaroLab/armor/blob/master/commands.md)<sp/>to<sp/></highlight></codeline>
+<codeline><highlight class="normal">see<sp/>the<sp/>possible<sp/>`command`<sp/>and<sp/>the<sp/>relative<sp/>`primary_command_spec`,<sp/>`secondary_command_spec`,<sp/></highlight></codeline>
+<codeline><highlight class="normal">and<sp/>`args`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">On<sp/>the<sp/>other<sp/>hand,<sp/>the<sp/>response<sp/>of<sp/>aRMOR<sp/>involves<sp/>the<sp/>following<sp/>fields.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`success`:<sp/>It<sp/>is<sp/>a<sp/>Boolean<sp/>specifying<sp/>if<sp/>the<sp/>service<sp/>was<sp/>successfully<sp/>computed.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`exit_code`:<sp/>It<sp/>is<sp/>an<sp/>integer<sp/>specifying<sp/>a<sp/>possible<sp/>source<sp/>of<sp/>errors.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`error_description`:<sp/>It<sp/>is<sp/>a<sp/>string<sp/>describing<sp/>a<sp/>possible<sp/>error.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`is_consistent`:<sp/>It<sp/>is<sp/>a<sp/>Boolean<sp/>specifying<sp/>if<sp/>the<sp/>ontology<sp/>is<sp/>consistent.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`timeout`:<sp/>It<sp/>is<sp/>an<sp/>optional<sp/>field<sp/>used<sp/>while<sp/>performing<sp/>SPARQL<sp/>queries.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`queried_objects`:<sp/>It<sp/>is<sp/>an<sp/>optional<sp/>list<sp/>of<sp/>strings<sp/>representing<sp/>the<sp/>queried<sp/>entities.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>-<sp/>`sparql_queried_objects`:<sp/>It<sp/>is<sp/>an<sp/>optional<sp/>list<sp/>of<sp/>QueryItem<sp/>(key-value<sp/>pairs)<sp/>given<sp/>as<sp/>the</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>result<sp/>of<sp/>a<sp/>SPARQL<sp/>query.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Please,<sp/>see<sp/>the<sp/>aRMOR<sp/>[package](https://github.com/EmaroLab/armor)<sp/>for<sp/>more<sp/>documentation.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>showing<sp/>purposes,<sp/>the<sp/>following<sp/>sections<sp/>assume<sp/>that<sp/>aRMOR<sp/>is<sp/>running,<sp/>and<sp/>we<sp/>will<sp/>make<sp/>requests</highlight></codeline>
+<codeline><highlight class="normal">directly<sp/>from<sp/>the<sp/>terminal,<sp/>i.e.,<sp/>by<sp/>using<sp/>the<sp/>`rosservice<sp/>call<sp/>...`<sp/>commands.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Load<sp/>an<sp/>Ontology</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Make<sp/>the<sp/>following<sp/>request<sp/>to<sp/>load<sp/>an<sp/>ontology<sp/>from<sp/>file.</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;LOAD&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;FILE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;&lt;path_to_file&gt;/topological_map.owl&apos;,<sp/>&apos;http://bnc/exp-rob-lab/2022-23&apos;,<sp/>&apos;true&apos;,<sp/>&apos;PELLET&apos;,<sp/>&apos;false&apos;]&quot;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Where<sp/>we<sp/>set<sp/>a<sp/>`client_name`<sp/>which<sp/>will<sp/>be<sp/>shared<sp/>among<sp/>all<sp/>the<sp/>clients<sp/>since<sp/>we<sp/>do<sp/>not<sp/>need<sp/>to</highlight></codeline>
+<codeline><highlight class="normal">synchronize<sp/>them.<sp/>Also,<sp/>we<sp/>set<sp/>a<sp/>`reference_name`<sp/>that<sp/>will<sp/>be<sp/>used<sp/>to<sp/>always<sp/>refer<sp/>to<sp/>the<sp/>same</highlight></codeline>
+<codeline><highlight class="normal">ontology<sp/>loaded<sp/>on<sp/>memory.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Then,<sp/>we<sp/>configure<sp/>the<sp/>command<sp/>with<sp/>the<sp/>following<sp/>`args`.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>1.<sp/>The<sp/>path<sp/>to<sp/>the<sp/>file<sp/>containing<sp/>the<sp/>ontology<sp/>to<sp/>load.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>2.<sp/>The<sp/>IRI,<sp/>which<sp/>is<sp/>specified<sp/>in<sp/>the<sp/>ontology<sp/>itself.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>3.<sp/>A<sp/>Boolean<sp/>value<sp/>set<sp/>to<sp/>`true`<sp/>for<sp/>specifying<sp/>that<sp/>the<sp/>manipulation<sp/>should<sp/>be<sp/>automatically<sp/>applied.<sp/>If<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>`false`,<sp/>then<sp/>the<sp/>`APPLY`<sp/>command<sp/>should<sp/>be<sp/>explicitly<sp/>stated<sp/>to<sp/>apply<sp/>pending<sp/>manipulations.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>4.<sp/>The<sp/>name<sp/>of<sp/>the<sp/>reasoner<sp/>to<sp/>use.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>5.<sp/>A<sp/>Boolean<sp/>set<sp/>to<sp/>`false`<sp/>for<sp/>specifying<sp/>that<sp/>the<sp/>reasoning<sp/>process<sp/>should<sp/>be<sp/>explicitly<sp/>stated.<sp/>If</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>`true`,<sp/>then<sp/>the<sp/>reasoning<sp/>process<sp/>automatically<sp/>runs<sp/>after<sp/>each<sp/>manipulation;<sp/>this<sp/>would<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>lead<sp/>to<sp/>an<sp/>expensive<sp/>computation.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Note<sp/>that,<sp/>in<sp/>this<sp/>example,<sp/>the<sp/>1st<sp/>and<sp/>2nd<sp/>fields<sp/>of<sp/>the<sp/>request<sp/>above<sp/>do<sp/>not<sp/>change<sp/>in<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">message<sp/>below.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Add<sp/>a<sp/>Location</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">An<sp/>individual<sp/>`L`<sp/>that<sp/>represents<sp/>a<sp/>new<sp/>location<sp/>can<sp/>be<sp/>added<sp/>in<sp/>the<sp/>ontology<sp/>if<sp/>it<sp/>is<sp/>paired<sp/></highlight></codeline>
+<codeline><highlight class="normal">with<sp/>one<sp/>or<sp/>more<sp/>doors<sp/>`D`<sp/>through<sp/>the<sp/>object<sp/>property<sp/>`hasDoor`.<sp/>This<sp/>can<sp/>be<sp/>done<sp/>with<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">following<sp/>request<sp/>made<sp/>for<sp/>each<sp/>door<sp/>of<sp/>`L`.</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;ADD&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;OBJECTPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;hasDoor&apos;,<sp/>&apos;L&apos;,<sp/>&apos;D&apos;]&quot;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">When<sp/>all<sp/>locations<sp/>(e.g.,<sp/>`L1....Ln`)<sp/>and<sp/>doors<sp/>(e.g.,<sp/>`D1...Dm`)<sp/>have<sp/>been<sp/>added,<sp/>it<sp/>is<sp/></highlight></codeline>
+<codeline><highlight class="normal">important<sp/>to<sp/>set<sp/>them<sp/>as<sp/>different<sp/>individuals,<sp/>which<sp/>can<sp/>be<sp/>done<sp/>with<sp/>the<sp/>following<sp/>request.</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;DISJOINT&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;L1&apos;,<sp/>&apos;L2&apos;,<sp/>...,<sp/>&apos;Ln&apos;,<sp/>&apos;D1&apos;,<sp/>&apos;D2&apos;,<sp/>...,<sp/>&apos;Dm&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">These<sp/>logic<sp/>axioms<sp/>are<sp/>enough<sp/>to<sp/>make<sp/>the<sp/>reasoning<sp/>infer<sp/>that<sp/>`D`<sp/>is<sp/>a<sp/>`DOOR`,<sp/>and<sp/>if<sp/>`L`<sp/>is</highlight></codeline>
+<codeline><highlight class="normal">a<sp/>`ROOM`<sp/>or<sp/>a<sp/>`CORRIDOR`.<sp/>In<sp/>addition,<sp/>these<sp/>axioms<sp/>allow<sp/>the<sp/>reasoner<sp/>to<sp/>infer<sp/>the<sp/>location<sp/></highlight></codeline>
+<codeline><highlight class="normal">that<sp/>the<sp/>robot<sp/>can<sp/>reach.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Robot&apos;s<sp/>Movements<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>`ROBOT`<sp/>named<sp/>`Robot1`<sp/>is<sp/>always<sp/>in<sp/>a<sp/>location,<sp/>and<sp/>this<sp/>should<sp/>be<sp/>consistently<sp/>represented</highlight></codeline>
+<codeline><highlight class="normal">in<sp/>the<sp/>ontology<sp/>through<sp/>the<sp/>`isIn`<sp/>property,<sp/>over<sp/>time.<sp/>To<sp/>represent<sp/>the<sp/>location<sp/>of<sp/>the</highlight></codeline>
+<codeline><highlight class="normal">robot<sp/>(e.g.,<sp/>`Robot1<sp/>isIn<sp/>L1`),<sp/>you<sp/>should<sp/>use<sp/>the<sp/>following<sp/>request.</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;ADD&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;OBJECTPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;isIn&apos;,<sp/>&apos;Robot1&apos;,<sp/>&apos;L1&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Since<sp/>the<sp/>location<sp/>of<sp/>the<sp/>robot<sp/>should<sp/>be<sp/>unique,<sp/>when<sp/>the<sp/>robot<sp/>moves<sp/>to<sp/>another<sp/>location<sp/></highlight></codeline>
+<codeline><highlight class="normal">(e.g.,<sp/>`L2`)<sp/>we<sp/>should<sp/>remove<sp/>the<sp/>old<sp/>`isIn`<sp/>value.<sp/>This<sp/>can<sp/>be<sp/>done<sp/>through<sp/>the<sp/>command</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;REPLACE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;OBJECTPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;isIn&apos;,<sp/>&apos;Robot1&apos;,<sp/><sp/>&apos;L2&apos;,<sp/>&apos;L1&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Timestamps<sp/>Updating</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>instances<sp/>representing<sp/>the<sp/>robot<sp/>and<sp/>locations<sp/>are<sp/>associated<sp/>with<sp/>a<sp/>Unix<sp/>timestamp,<sp/></highlight></codeline>
+<codeline><highlight class="normal">respectively<sp/>through<sp/>the<sp/>`now`<sp/>and<sp/>`visitedAt`<sp/>data<sp/>properties,<sp/>which<sp/>are<sp/>used<sp/>to<sp/>compute<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">urgency.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Such<sp/>timestamps<sp/>might<sp/>be<sp/>represented<sp/>in<sp/>seconds,<sp/>and<sp/>they<sp/>should<sp/>be<sp/>unique<sp/>for<sp/>each<sp/></highlight></codeline>
+<codeline><highlight class="normal">individual.<sp/>Therefore,<sp/>when<sp/>a<sp/>timestamp<sp/>is<sp/>introduced<sp/>for<sp/>the<sp/>first<sp/>time,<sp/>the<sp/>`ADD`<sp/>command<sp/></highlight></codeline>
+<codeline><highlight class="normal">should<sp/>be<sp/>used.<sp/>Then,<sp/>similarly<sp/>to<sp/>above,<sp/>the<sp/>`REPLACE`<sp/>command<sp/>should<sp/>be<sp/>used<sp/>for<sp/>updating<sp/>such<sp/></highlight></codeline>
+<codeline><highlight class="normal">a<sp/>timestamp.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Note<sp/>that<sp/>the<sp/>`REPLACE`<sp/>command<sp/>also<sp/>requires<sp/>the<sp/>old<sp/>value<sp/>to<sp/>override.<sp/>Such<sp/>a<sp/>value<sp/>might<sp/>be<sp/></highlight></codeline>
+<codeline><highlight class="normal">retrieved<sp/>from<sp/>the<sp/>ontology<sp/>through<sp/>a<sp/>query.<sp/>However,<sp/>if<sp/>some<sp/>manipulations<sp/>have<sp/>been<sp/>performed,<sp/></highlight></codeline>
+<codeline><highlight class="normal">or<sp/>if<sp/>it<sp/>is<sp/>the<sp/>first<sp/>query<sp/>we<sp/>request<sp/>to<sp/>aRMOR,<sp/>then<sp/>we<sp/>should<sp/>invoke<sp/>the<sp/>reasoner<sp/>first,<sp/>i.e.,<sp/></highlight></codeline>
+<codeline><highlight class="normal">make<sp/>the<sp/>request</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;REASON&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;&apos;]&quot;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Then,<sp/>we<sp/>can<sp/>query<sp/>the<sp/>timestamp<sp/>associated<sp/>with<sp/>the<sp/>robot,<sp/>which<sp/>represents<sp/>the<sp/>last<sp/>time<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">robot<sp/>changed<sp/>location.<sp/>Thus,<sp/>use<sp/>the<sp/>following<sp/>request,<sp/>which<sp/>should<sp/>return<sp/>`1665579740`.</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;QUERY&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;DATAPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;now&apos;,<sp/>&apos;Robot1&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now,<sp/>we<sp/>can<sp/>finally<sp/>update<sp/>the<sp/>timestamp<sp/>associated<sp/>with<sp/>the<sp/>robot<sp/>(e.g.,<sp/>to<sp/>`1665579750`)<sp/>with:</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;REPLACE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;DATAPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;now&apos;,<sp/>&apos;Robot1&apos;,<sp/>&apos;Long&apos;,<sp/>&apos;1665579750&apos;,<sp/>&apos;1665579740&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>above<sp/>procedure<sp/>concerns<sp/>the<sp/>logic<sp/>axiom<sp/>involving<sp/>the<sp/>`Robot1`<sp/>individual,<sp/>the<sp/>`now`<sp/>data<sp/></highlight></codeline>
+<codeline><highlight class="normal">property<sp/>and<sp/>a<sp/>`Long`<sp/>timestamp,<sp/>and<sp/>it<sp/>should<sp/>be<sp/>done<sp/>when<sp/>the<sp/>robot<sp/>moves<sp/>to<sp/>a<sp/>new<sp/></highlight></codeline>
+<codeline><highlight class="normal">location.<sp/>When<sp/>the<sp/>robot<sp/>enters<sp/>a<sp/>specific<sp/>location,<sp/>then<sp/>the<sp/>same<sp/>procedure<sp/>should<sp/>also<sp/>be<sp/>used<sp/></highlight></codeline>
+<codeline><highlight class="normal">for<sp/>such<sp/>a<sp/>location.<sp/>For<sp/>instance,<sp/>let<sp/>`Robot1`<sp/>go<sp/>in<sp/>the<sp/>location<sp/>`L`<sp/>at<sp/>timestamp<sp/>`1665579750`,<sp/></highlight></codeline>
+<codeline><highlight class="normal">then<sp/>the<sp/>`visitedAt`<sp/>property<sp/>of<sp/>`L`<sp/>should<sp/>be<sp/>replaced<sp/>through<sp/>the<sp/>following<sp/>request;<sp/>where<sp/>`</highlight></codeline>
+<codeline><highlight class="normal">1665579710`<sp/>is<sp/>the<sp/>last<sp/>time<sp/>`Robot1`<sp/>was<sp/>in<sp/>`L`<sp/>before.</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;REPLACE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;DATAPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;visitedAt&apos;,<sp/>&apos;L&apos;,<sp/>&apos;Long&apos;,<sp/>&apos;1665579750&apos;,<sp/>&apos;1665579710&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Retrieving<sp/>Inferred<sp/>Knowledge<sp/>Through<sp/>Queries</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>retrieve<sp/>inferred<sp/>knowledge,<sp/>update<sp/>the<sp/>reasoner<sp/>with<sp/>the<sp/>`REASON`<sp/>command<sp/>above<sp/>if<sp/>some<sp/></highlight></codeline>
+<codeline><highlight class="normal">manipulation<sp/>has<sp/>been<sp/>done<sp/>from<sp/>the<sp/>last<sp/>time<sp/>the<sp/>reasoner<sp/>has<sp/>been<sp/>updated.<sp/>Then,<sp/>query<sp/>all<sp/>the<sp/></highlight></codeline>
+<codeline><highlight class="normal">`canReach`<sp/>value<sp/>associated<sp/>with<sp/>`Robot1`<sp/>with</highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;QUERY&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;OBJECTPROP&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;canReach&apos;,<sp/>&apos;Robot1&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">The<sp/>request<sp/>above<sp/>would<sp/>return<sp/>a<sp/>set<sp/>of<sp/>locations<sp/>that<sp/>the<sp/>robot<sp/>can<sp/>reach<sp/>by<sp/>passing<sp/>through<sp/>a<sp/></highlight></codeline>
+<codeline><highlight class="normal">`DOOR`,<sp/>e.g.,<sp/>`L1`,<sp/>`L2`,<sp/>etc.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Then,<sp/>we<sp/>can<sp/>query<sp/>information<sp/>about<sp/>these<sp/>locations,<sp/>e.g.,<sp/></highlight></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;QUERY&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;CLASS&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;IND&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;L1&apos;,<sp/>&apos;false&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">Which<sp/>returns<sp/>a<sp/>set<sp/>of<sp/>classes<sp/>that<sp/>might<sp/>involve<sp/>`ROOM`,<sp/>`CORRIDOR`,<sp/>and<sp/>`URGENT`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Save<sp/>the<sp/>Ontology</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>debugging<sp/>purposes,<sp/>you<sp/>can<sp/>save<sp/>the<sp/>ontology<sp/>manipulated<sp/>so<sp/>far<sp/>in<sp/>order<sp/>to<sp/>open<sp/>it<sp/>with</highlight></codeline>
+<codeline><highlight class="normal">Protégé<sp/>and<sp/>inspect<sp/>its<sp/>contents.<sp/>To<sp/>save<sp/>an<sp/>ontology<sp/>use</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">rosservice<sp/>call<sp/>/armor_interface_srv<sp/>&quot;armor_request:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>client_name:<sp/>&apos;example&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>reference_name:<sp/>&apos;ontoRef&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>command:<sp/>&apos;SAVE&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>primary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>secondary_command_spec:<sp/>&apos;&apos;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>args:<sp/>[&apos;&lt;file_path&gt;/my_topological_map.owl&apos;]&quot;<sp/></highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Known<sp/>issues</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Check<sp/>the<sp/>known<sp/>issues<sp/>in<sp/>the<sp/>*Issue*<sp/>tab<sp/>of<sp/>this<sp/>reposiory.<sp/></highlight></codeline>
+<codeline><highlight class="normal">They<sp/>concerns<sp/>the<sp/>[armor_py_api](https://github.com/buoncubi/topological_map/issues/1)<sp/>client,<sp/></highlight></codeline>
+<codeline><highlight class="normal">and<sp/>[opening<sp/>ontologies<sp/>with<sp/>SWRL<sp/>rules<sp/>on<sp/>Protégé](https://github.com/buoncubi/topological_map/issues/2).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">---</highlight></codeline>
+    </programlisting>
+    <location file="topological_map/README.md"/>
+  </compounddef>
+</doxygen>

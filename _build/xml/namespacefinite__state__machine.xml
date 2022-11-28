@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefinite__state__machine" kind="namespace" language="Python">
+    <compoundname>finite_state_machine</compoundname>
+    <innerclass refid="classfinite__state__machine_1_1_corridor__cruise" prot="public">finite_state_machine::Corridor_cruise</innerclass>
+    <innerclass refid="classfinite__state__machine_1_1_load__map" prot="public">finite_state_machine::Load_map</innerclass>
+    <innerclass refid="classfinite__state__machine_1_1_recharging" prot="public">finite_state_machine::Recharging</innerclass>
+    <innerclass refid="classfinite__state__machine_1_1_room__visiting" prot="public">finite_state_machine::Room_visiting</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacefinite__state__machine_1adac7d29866d4f2725cbda317814add49" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int finite_state_machine.battery_status</definition>
+        <argsstring></argsstring>
+        <name>battery_status</name>
+        <initializer>=  1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="26" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefinite__state__machine_1a4a95d7a98741b0b3eebc81786d6573cb" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int finite_state_machine.urgency_status</definition>
+        <argsstring></argsstring>
+        <name>urgency_status</name>
+        <initializer>=  0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="27" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefinite__state__machine_1af4d959f802e51d0467ad03a3f0c93955" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool finite_state_machine.loading</definition>
+        <argsstring></argsstring>
+        <name>loading</name>
+        <initializer>=  True</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="28" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefinite__state__machine_1a32da7c91457bead7084ca414f6191c3e" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string finite_state_machine.shared_connection</definition>
+        <argsstring></argsstring>
+        <name>shared_connection</name>
+        <initializer>=  &apos;&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="29" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefinite__state__machine_1ad17af8f1645a3a47e4deadc7ccd11e1d" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string finite_state_machine.are_urgent</definition>
+        <argsstring></argsstring>
+        <name>are_urgent</name>
+        <initializer>= &apos;&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="30" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefinite__state__machine_1afd118b5b10a871ae140f5cd26f39ed3c" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string finite_state_machine.robot_position</definition>
+        <argsstring></argsstring>
+        <name>robot_position</name>
+        <initializer>= &apos;&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="31" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefinite__state__machine_1a57d63bd8e8ad09a9d59eccc3e60fa21b" prot="public" static="no" mutable="no">
+        <type>string</type>
+        <definition>string finite_state_machine.timestamp</definition>
+        <argsstring></argsstring>
+        <name>timestamp</name>
+        <initializer>=  &apos;&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="32" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefinite__state__machine_1a52097984c057eadbc537ec223d7a6525" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.callback</definition>
+        <argsstring>(data)</argsstring>
+        <name>callback</name>
+        <param>
+          <type>data</type>
+          <defname>data</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Callback function for the map publisher */loader*, that modifies the value of the **global variable loading** and will let the code start.</verbatim> <linebreak/>
+ </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="34" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="34" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefinite__state__machine_1a92b25ba88c6fd28360e438e827ec74a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.callback_batt</definition>
+        <argsstring>(data)</argsstring>
+        <name>callback_batt</name>
+        <param>
+          <type>data</type>
+          <defname>data</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Callback function for the map publisher */battery_signal*, that modifies the value of the **global variable battery_status** and will let the code start.</verbatim> <linebreak/>
+ </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="48" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="48" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefinite__state__machine_1a5f8d9bf7c4535457aa3828733248902e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.find_path</definition>
+        <argsstring>(l1, l2, robPos)</argsstring>
+        <name>find_path</name>
+        <param>
+          <type>l1</type>
+          <defname>l1</defname>
+        </param>
+        <param>
+          <type>l2</type>
+          <defname>l2</defname>
+        </param>
+        <param>
+          <type>robPos</type>
+          <defname>robPos</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>This function is needed to plan the path from one position to another, recursively  scanning the list of reachable point for the robot and the connected area to the desired position
+
+Args
+    - **l1** the list resulting from querying the *connectedTo* data property of the robot position, returning a list of strings
+
+    - **l2** the list resulting from querying the *connectedTo* data property of the desired location, returning a list of strings
+
+    - **robPos** the robot position in the moment the function is called to check if the robot position appears in the *connectedTo* list of the desired location
+
+Returns
+    - **shared_connection** the shared variable that will be checked in the calling function :mod:`change_position`
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="62" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="62" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefinite__state__machine_1a9b4999f9679399226fe493dbfea006d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.find_time</definition>
+        <argsstring>(list)</argsstring>
+        <name>find_time</name>
+        <param>
+          <type>list</type>
+          <defname>list</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function to rewrite the queried time stamp, deleting the not integer part of the string, for both Rooms and Robot&apos;s data property
+
+Args
+    - **list** of queried objects section of the Armor service message
+
+Returns
+    all the element between the double quotes</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="90" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="90" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefinite__state__machine_1afcaf46f6dda30500440fbc82a55ef012" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.find_list</definition>
+        <argsstring>(list)</argsstring>
+        <name>find_list</name>
+        <param>
+          <type>list</type>
+          <defname>list</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function to rewrite the queried *connectedTo* data property list, extracting each element and saving it in the returned list as separate strings
+
+Args
+    - **list** of queried objects section of the Armor service message
+
+Returns
+    - **position_list** the list of strings of locations</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="107" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="107" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefinite__state__machine_1a967a37e3cd2f30bebb8fef463edf10ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.find_individual</definition>
+        <argsstring>(list)</argsstring>
+        <name>find_individual</name>
+        <param>
+          <type>list</type>
+          <defname>list</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function to rewrite the queried *isIn* Robot&apos;s object property, extracting the element and saving it in the returned string
+
+Args
+    - **list** of queried objects section of the Armor service message
+    
+Returns
+    - **location** the string containing the location name in which the Robot is in</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="137" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="137" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefinite__state__machine_1ae7119713b1961e01f47c4dbf6ab7a13b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.urgent_rooms</definition>
+        <argsstring>()</argsstring>
+        <name>urgent_rooms</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function that recursively checks on the *are_urgent* list and if the list is empty changes the flag *urgency_status* value to false
+
+Returns
+    - **are_urgent** list of the urgent rooms, to be modified in the :mod:`Room_visiting` status.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="164" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="164" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefinite__state__machine_1ac1fe105586183ee0a74c16f8938140c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.change_position</definition>
+        <argsstring>(robPos, desPos)</argsstring>
+        <name>change_position</name>
+        <param>
+          <type>robPos</type>
+          <defname>robPos</defname>
+        </param>
+        <param>
+          <type>desPos</type>
+          <defname>desPos</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function used everytime the Robot has to change position, taking into consideration different behaviors based on the different LOCATION&apos;s subclasses
+
+    - **ROOM** if the robot moves to a Room the time stap update is taken into cosideration 
+    - **URGENT** the behavior is the same as in the above case 
+    - **CORRIDOR** the robot will calculate the path to go into the corridor and advertise the State :mod:`Corridor_cruise`
+
+This is the main fuction for motion and takes the help of three other functions :mod:`find_list`, :mod:`find_path`, :mod:`find_time`; all of them used to clean the queried string.
+
+Args
+
+    - **robPos** is the robot position in the moment this function is called
+
+    - **desPos** is the desired position that calls this function
+
+Returns
+
+    - **robot_position** the updated robot position at the end of the location change
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="190" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="190" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefinite__state__machine_1a41225cd944336f18121ca93d83ca212a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def finite_state_machine.main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>This is the main function that initializes the node *finite_state_machine*, create the SMACH state machine and specifies the states with the transitions.
+Also initializes the subscription to the publishers.</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/finite_state_machine.py" line="576" column="1" bodyfile="scripts/finite_state_machine.py" bodystart="576" bodyend="604"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>.. module:: finite_state_machine
+   :platform: Unix
+   :synopsis: Python code that defines the finite state machine for the robot
+.. moduleauthor:: Alice Maria Catalano &lt;s5157341@studenti.unige.it&gt;
+
+This is finite state machine that uses the `Smach tool &lt;https://wiki.ros.org/smach&gt;`_ to implement it in ROS. 
+It menages the behavior  of a surveillance  robot, that stays mostly in corridors and goes to the rooms just when they turn **urgent** after 7 seconds of not visiting them 
+
+Subscribes  to:
+    - /loader a Boolean flag to communicate when the map is totally created.
+    - /battery_signal a Boolean flag to communicate when battery is low and when is totally charged</verbatim> </para>
+    </detaileddescription>
+    <location file="scripts/finite_state_machine.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

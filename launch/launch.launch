@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService" launch-prefix = "xterm -e"/>
+  <node name= "load_map" pkg= "assignment_1" type="load_map.py"  />
+  <node name= "battery_signal" pkg= "assignment_1" type="battery_signal.py"/>
+  <node name= "finite_state_machine" pkg= "assignment_1" type="finite_state_machine.py" output= "screen" />
+</launch>

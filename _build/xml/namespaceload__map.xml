@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespaceload__map" kind="namespace" language="Python">
+    <compoundname>load_map</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceload__map_1a030dd1e0fc7b255a77bc9f5f883cdf75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def load_map.find_time</definition>
+        <argsstring>(list)</argsstring>
+        <name>find_time</name>
+        <param>
+          <type>list</type>
+          <defname>list</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/load_map.py" line="23" column="1" bodyfile="scripts/load_map.py" bodystart="23" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaceload__map_1acccf914a014e643a53012ec4d05111dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def load_map.load_std_map</definition>
+        <argsstring>()</argsstring>
+        <name>load_std_map</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function to initialize the node, to initialize the publisher and to use the `Armor commands &lt;https://github.com/EmaroLab/armor/blob/master/commands.md&gt;`_ to create the ontology.
+It will publish a boolean that will be passed to the state ``Load_map``, advertised by :mod:`load_std_map`</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/load_map.py" line="46" column="1" bodyfile="scripts/load_map.py" bodystart="46" bodyend="146"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>.. module:: load_map
+   :platform: Unix
+   :synopsis: Python code to create the .owl ontology 
+.. moduleauthor:: Alice Maria Catalano &lt;s5157341@studenti.unige.it&gt;
+
+ROS Node to create the Ontology map adn initialzie the timestamps for the Rooms, which represents a 2D environment of 4 rooms and 3 corridors
+
+Publishes to:
+    - /loader a boolean flag to communicate when the map is totally created.</verbatim> </para>
+    </detaileddescription>
+    <location file="scripts/load_map.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

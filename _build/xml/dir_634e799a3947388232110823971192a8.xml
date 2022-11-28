@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_634e799a3947388232110823971192a8" kind="dir">
+    <compoundname>src/scripts</compoundname>
+    <innerfile refid="battery__signal_8py">battery_signal.py</innerfile>
+    <innerfile refid="finite__state__machine_8py">finite_state_machine.py</innerfile>
+    <innerfile refid="load__map_8py">load_map.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/scripts/"/>
+  </compounddef>
+</doxygen>
